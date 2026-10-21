@@ -1,10 +1,20 @@
 /* Mark that JavaScript is running (lets CSS hide sections for the reveal effect) */
 document.documentElement.classList.add('js');
 
-/* ===== GitHub link: set your profile URL here ===== */
-const GITHUB_URL = ''; // example: 'https://github.com/your-username'
-const ghBtn = document.getElementById('ghBtn');
-if (GITHUB_URL) { ghBtn.href = GITHUB_URL; ghBtn.hidden = false; }
+/* ===== Project GitHub repository links: paste each repo URL between the quotes ===== */
+const PROJECT_REPOS = {
+  hr: 'https://github.com/mohamedabudhahir/hr-analytics-employee-attribution',
+  customer: 'https://github.com/mohamedabudhahir/customer-shopping-behavior-analysis'
+};
+document.querySelectorAll('[data-repo]').forEach(a => {
+  const url = PROJECT_REPOS[a.dataset.repo];
+  if (url) {
+    a.href = url; a.target = '_blank'; a.rel = 'noopener';
+    a.removeAttribute('aria-disabled'); a.textContent = 'View on GitHub';
+  } else {
+    a.addEventListener('click', e => e.preventDefault()); // placeholder: nothing to open yet
+  }
+});
 
 /* Footer year */
 document.getElementById('year').textContent = new Date().getFullYear();
